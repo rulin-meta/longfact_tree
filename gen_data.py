@@ -214,16 +214,17 @@ class FactualGenerationTree:
 
             while resample_count < self.max_resample_attempts:
                 sentence = self.generate_single_sentence(prompt, previous_sentences)
-                is_factual, score = self.verify_sentence(prompt, sentence, previous_sentences)
+                score = self.verify_sentence(prompt, sentence, previous_sentences)
                 metadata["verification_attempts"] += 1
                 
                 # Record this attempt
                 attempts.append((sentence, score))
                 
-                if is_factual and score > best_score:
+                if score > best_score:
                     best_sentence = sentence
                     best_score = score
-                    break  # Found a factual sentence, no need to resample
+                    if score == 1.0:
+                        break  # Found a factual sentence, no need to resample
                 
                 resample_count += 1
                 metadata["total_resamples"] += 1
@@ -488,8 +489,13 @@ if __name__ == "__main__":
 
     # Example verification function (replace with actual implementation)
     def dummy_verify_fn(question: str, answer: str) -> Tuple[bool, float]:
-        return random.random() > 0.3, random.random()
+        return random.random()
 
+    from veriscore import veriscore
+    def veriscore_verify_fn(question: str, answer: str) -> Tuple[bool, float]:
+        return veriscore(question, answer)
+    
+    
     print(f"\nStarting generation with parameters:")
     print(f"  Model: {args.model_name}")
     print(f"  Max depth: {args.max_depth}")
@@ -506,7 +512,7 @@ if __name__ == "__main__":
     # Generate traces for the dataset
     generate_dataset(
         model_name=args.model_name,
-        verify_fn=dummy_verify_fn,
+        verify_fn=veriscore_verify_fn,
         max_examples=args.max_examples,
         max_resample_attempts=args.max_resample_attempts,
         max_depth=args.max_depth,

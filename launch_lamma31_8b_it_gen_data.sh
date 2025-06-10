@@ -35,4 +35,4 @@ python gen_data.py \
     --max_depth ${DEPTH} \
     --max_resample_attempts ${RESAMPLE_ATTEMPTS} \
     --max_examples ${MAX_EXAMPLES} \
-    --output_dir data/longfact_tree_data_llama31_8b_random_${EXP_ID}
+    --output_dir data/longfact_tree_data_llama31_8b_veriscore_${EXP_ID}

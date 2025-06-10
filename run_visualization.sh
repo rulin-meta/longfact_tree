@@ -1,1 +1,1 @@
-python visualize_trace.py /checkpoint/comem/rulin/multi-token-pred/longfact_tree/generation_traces/trace_0000.pt
+python /checkpoint/comem/rulin/multi-token-pred/longfact_tree/visualize_trace.py /checkpoint/comem/rulin/multi-token-pred/longfact_tree/data/longfact_tree_data_llama33_70b_veriscore_d50_r5/trace_0002.pt

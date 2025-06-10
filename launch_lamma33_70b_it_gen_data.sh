@@ -36,4 +36,4 @@ python gen_data.py \
     --max_resample_attempts ${RESAMPLE_ATTEMPTS} \
     --max_examples ${MAX_EXAMPLES} \
     --tensor_parallel_size 8 \
-    --output_dir data/longfact_tree_data_llama33_70b_random_${EXP_ID}
+    --output_dir data/longfact_tree_data_llama33_70b_veriscore_${EXP_ID}
